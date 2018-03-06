@@ -31,6 +31,7 @@ module Selenium
         include DriverExtensions::TakesScreenshot
 
         def initialize(opts = {})
+          puts "initializing Selenium::WebDriver::Chrome::Driver"
           opts[:desired_capabilities] = create_capabilities(opts)
 
           unless opts.key?(:url)

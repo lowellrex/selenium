@@ -39,6 +39,7 @@ module Selenium
         #
 
         def for(browser, opts = {})
+          puts "\n\nbrowser: #{browser}\n\n"
           case browser
           when :chrome
             Chrome::Driver.new(opts)
