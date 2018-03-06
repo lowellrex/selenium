@@ -44,10 +44,13 @@ module Selenium
       attr_accessor :host
 
       def initialize(executable_path, port, driver_opts)
+        puts "running Selenium::WebDriver::Service.initialize()"
         @executable_path = binary_path(executable_path)
         @host            = Platform.localhost
         @port            = Integer(port)
         @extra_args      = extract_service_args(driver_opts)
+
+        puts "done defining a bunch of variables in Selenium::WebDriver::Service.initialize()"
 
         raise Error::WebDriverError, "invalid port: #{@port}" if @port < 1
       end
@@ -60,7 +63,9 @@ module Selenium
       end
 
       def start
+        puts "running Selenium::WebDriver::Service.start()"
         if process_running?
+          puts "process is already running"
           raise "already started: #{uri.inspect} #{@executable_path.inspect}"
         end
 

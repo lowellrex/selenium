@@ -69,8 +69,11 @@ module Selenium
       #
 
       def initialize(bridge, listener: nil)
+        puts "running Selenium::WebDriver::Driver.initialize()"
         @bridge = bridge
+        puts "setting @bridge"
         @bridge = Support::EventFiringBridge.new(bridge, listener) if listener
+        puts "done setting @bridge"
       end
 
       def inspect

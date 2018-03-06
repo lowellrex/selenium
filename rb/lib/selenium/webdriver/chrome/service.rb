@@ -34,8 +34,11 @@ module Selenium
         private
 
         def start_process
+          puts "in Selenium::WebDriver::Chrome::Service.start_process"
           @process = build_process(@executable_path, "--port=#{@port}", *@extra_args)
           @process.leader = true unless Platform.windows?
+
+          puts "starting process"
           @process.start
         end
 

@@ -35,19 +35,33 @@ module Selenium
           opts[:desired_capabilities] = create_capabilities(opts)
 
           unless opts.key?(:url)
+            puts "defining driver_path"
             driver_path = opts.delete(:driver_path) || Chrome.driver_path
+
+            puts "defining driver_opts"
             driver_opts = opts.delete(:driver_opts) || {}
+
+            puts "defining port"
             port = opts.delete(:port) || Service::DEFAULT_PORT
 
+            puts "defining @service"
             @service = Service.new(driver_path, port, driver_opts)
+
+            puts "starting @service"
             @service.start
+
+            puts "setting opts url to @service.uri"
             opts[:url] = @service.uri
           end
 
+          puts "defining listener"
           listener = opts.delete(:listener)
+
+          puts "defining bridge"
           @bridge = Remote::Bridge.handshake(opts)
           @bridge.extend Bridge
 
+          puts "running super() for Selenium::WebDriver::Chrome::Driver.initialize"
           super(@bridge, listener: listener)
         end
 

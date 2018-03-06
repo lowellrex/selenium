@@ -40,6 +40,7 @@ module Selenium
         # @return [OSS:Bridge, W3C::Bridge]
         #
         def self.handshake(**opts)
+          puts "inside Remote::Bridge.handshake()"
           desired_capabilities = opts.delete(:desired_capabilities) { Capabilities.new }
 
           if desired_capabilities.is_a?(Symbol)
@@ -49,6 +50,7 @@ module Selenium
             desired_capabilities = Capabilities.__send__(desired_capabilities)
           end
 
+          puts "instantiating new puts Remote::Bridge"
           bridge = new(opts)
           capabilities = bridge.create_session(desired_capabilities)
 
