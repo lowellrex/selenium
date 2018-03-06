@@ -93,15 +93,18 @@ module Selenium
       private
 
       def build_process(*command)
+        puts "in Selenium::WebDriver::Service.build_process()"
         WebDriver.logger.debug("Executing Process #{command}")
+        p command
         @process = ChildProcess.build(*command)
+        puts "Done building ChildProcess"
         if WebDriver.logger.debug?
           @process.io.stdout = @process.io.stderr = WebDriver.logger.io
         elsif Platform.jruby?
           # Apparently we need to read the output of drivers on JRuby.
           @process.io.stdout = @process.io.stderr = File.new(Platform.null_device, 'w')
         end
-
+        puts "returning ChildProcess"
         @process
       end
 
